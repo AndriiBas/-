@@ -1902,7 +1902,9 @@
         // Initial update
         updateNavigation();
         updateProgressBar();
-        startAutoplay();
+        if (!('ontouchstart' in window)) {
+    startAutoplay();
+}
     </script>
 
 </body>
