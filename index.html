@@ -4,11 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PROFITLAND - Cyberpunk Trading Terminal</title>
+    <title>ProfitLand - Advanced Algorithmic Trading Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <style>
         * {
@@ -25,67 +24,12 @@
         }
 
         body {
-            font-family: 'Orbitron', 'Share Tech Mono', monospace;
-            background: #0a0a0f;
-            color: #00ff9f;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #000000;
+            color: #fff;
             line-height: 1.6;
             position: relative;
             overflow-x: hidden;
-        }
-
-        /* Cyberpunk Grid Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                linear-gradient(90deg, rgba(0, 255, 159, 0.03) 1px, transparent 1px),
-                linear-gradient(rgba(0, 255, 159, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 0;
-            animation: gridScroll 20s linear infinite;
-        }
-
-        @keyframes gridScroll {
-            0% {
-                transform: perspective(500px) rotateX(60deg) translateY(0);
-            }
-
-            100% {
-                transform: perspective(500px) rotateX(60deg) translateY(50px);
-            }
-        }
-
-        /* Neon Scanlines */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: repeating-linear-gradient(0deg,
-                    rgba(0, 255, 159, 0.015) 0px,
-                    transparent 2px,
-                    transparent 4px,
-                    rgba(0, 255, 159, 0.015) 4px);
-            pointer-events: none;
-            z-index: 1;
-            animation: scanlines 8s linear infinite;
-        }
-
-        @keyframes scanlines {
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(4px);
-            }
         }
 
         /* Progress Bar */
@@ -94,35 +38,21 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: rgba(0, 0, 0, 0.8);
+            height: 4px;
+            background: rgba(0, 0, 0, 0.3);
             z-index: 10000;
             pointer-events: none;
-            box-shadow: 0 0 5px rgba(0, 255, 159, 0.3);
         }
 
         .progress-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, #00ff9f, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, #ff6b35, #ff0000);
             transition: width 0.3s ease;
-            box-shadow: 0 0 10px rgba(0, 255, 159, 0.5);
-            animation: neonPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
         }
 
-        @keyframes neonPulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(0, 255, 159, 0.5), 0 0 20px rgba(0, 255, 159, 0.2);
-            }
-
-            50% {
-                box-shadow: 0 0 15px rgba(0, 255, 159, 0.7), 0 0 30px rgba(0, 255, 159, 0.3);
-            }
-        }
-
-        /* Autoplay Control */
+        /* Play/Pause Button */
         .autoplay-control {
             position: fixed;
             bottom: 30px;
@@ -130,40 +60,91 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff9f;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+            border: none;
+            color: white;
             font-size: 20px;
             cursor: pointer;
             z-index: 10000;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 255, 159, 0.4), inset 0 0 10px rgba(0, 255, 159, 0.1);
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.4);
             transition: all 0.3s ease;
-            animation: buttonGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes buttonGlow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 10px rgba(0, 255, 159, 0.4), inset 0 0 10px rgba(0, 255, 159, 0.1);
-            }
-
-            50% {
-                box-shadow: 0 0 20px rgba(0, 255, 159, 0.6), inset 0 0 15px rgba(0, 255, 159, 0.15);
-            }
         }
 
         .autoplay-control:hover {
             transform: scale(1.1);
-            border-color: #ff00ff;
-            color: #ff00ff;
-            box-shadow: 0 0 15px rgba(255, 0, 255, 0.6), inset 0 0 15px rgba(255, 0, 255, 0.2);
+            box-shadow: 0 6px 30px rgba(255, 107, 53, 0.6);
         }
 
-        /* Floating Particles */
+        .autoplay-control.playing {
+            background: linear-gradient(135deg, #ff0000, #ff6b35);
+        }
+
+        /* Enhanced animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 80% 80%, rgba(255, 107, 53, 0.12) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes backgroundFloat {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            33% {
+                transform: translate(30px, -30px) rotate(1deg);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) rotate(-1deg);
+            }
+        }
+
+        /* Animated grid with glow */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255, 107, 53, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 107, 53, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+            animation: gridPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Floating particles */
         .particles {
             position: fixed;
             top: 0;
@@ -178,9 +159,8 @@
             position: absolute;
             width: 2px;
             height: 2px;
-            background: #00ff9f;
+            background: rgba(255, 107, 53, 0.4);
             border-radius: 50%;
-            box-shadow: 0 0 5px #00ff9f;
             animation: float 15s infinite;
         }
 
@@ -206,7 +186,7 @@
             }
         }
 
-        /* Slide Navigation */
+        /* Slide navigation dots */
         .slide-nav {
             position: fixed;
             right: 30px;
@@ -222,23 +202,21 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(0, 255, 159, 0.3);
-            border: 2px solid #00ff9f;
+            background: rgba(255, 107, 53, 0.3);
+            border: 2px solid rgba(255, 107, 53, 0.5);
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 0 5px rgba(0, 255, 159, 0.3);
         }
 
         .slide-nav-dot:hover {
-            background: rgba(0, 255, 159, 0.6);
+            background: rgba(255, 107, 53, 0.6);
             transform: scale(1.2);
-            box-shadow: 0 0 10px rgba(0, 255, 159, 0.5);
         }
 
         .slide-nav-dot.active {
-            background: #00ff9f;
-            border-color: #ff00ff;
-            box-shadow: 0 0 10px #00ff9f, 0 0 20px rgba(0, 255, 159, 0.3);
+            background: #ff6b35;
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.8);
             transform: scale(1.3);
         }
 
@@ -278,31 +256,30 @@
 
         .badge {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid #00ff9f;
-            color: #00ff9f;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2), rgba(255, 107, 53, 0.1));
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            color: #ff6b35;
             padding: 12px 28px;
-            border-radius: 0;
+            border-radius: 50px;
             font-size: 13px;
             font-weight: 700;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             margin-bottom: 40px;
-            box-shadow: 0 0 10px rgba(0, 255, 159, 0.3), inset 0 0 10px rgba(0, 255, 159, 0.05);
             animation: badgePulse 2s ease-in-out infinite;
-            font-family: 'Share Tech Mono', monospace;
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
         }
 
         @keyframes badgePulse {
 
             0%,
             100% {
-                box-shadow: 0 0 10px rgba(0, 255, 159, 0.3), inset 0 0 10px rgba(0, 255, 159, 0.05);
+                box-shadow: 0 0 30px rgba(255, 107, 53, 0.3), 0 0 60px rgba(255, 107, 53, 0.1);
                 transform: scale(1);
             }
 
             50% {
-                box-shadow: 0 0 20px rgba(0, 255, 159, 0.5), inset 0 0 15px rgba(0, 255, 159, 0.1);
+                box-shadow: 0 0 50px rgba(255, 107, 53, 0.5), 0 0 100px rgba(255, 107, 53, 0.2);
                 transform: scale(1.05);
             }
         }
@@ -310,112 +287,64 @@
         .logo {
             font-size: 82px;
             font-weight: 900;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 50%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 25px;
-            letter-spacing: 10px;
-            text-shadow:
-                0 0 5px rgba(0, 255, 159, 0.8),
-                0 0 10px rgba(0, 255, 159, 0.5),
-                2px 2px rgba(255, 0, 255, 0.6),
-                -2px -2px rgba(0, 255, 255, 0.6);
-            animation: logoGlitch 3s ease-in-out infinite;
+            letter-spacing: 6px;
+            text-shadow: 0 0 80px rgba(255, 107, 53, 0.5);
+            animation: logoGlow 3s ease-in-out infinite;
         }
 
-        @keyframes logoGlitch {
+        @keyframes logoGlow {
 
             0%,
-            90%,
             100% {
-                text-shadow:
-                    0 0 5px rgba(0, 255, 159, 0.8),
-                    0 0 10px rgba(0, 255, 159, 0.5),
-                    2px 2px rgba(255, 0, 255, 0.6),
-                    -2px -2px rgba(0, 255, 255, 0.6);
+                filter: brightness(1);
             }
 
-            92% {
-                text-shadow:
-                    0 0 5px rgba(0, 255, 159, 0.8),
-                    5px 5px rgba(255, 0, 255, 0.8),
-                    -5px -5px rgba(0, 255, 255, 0.8);
-                transform: translate(2px, 0);
-            }
-
-            94% {
-                text-shadow:
-                    0 0 5px rgba(0, 255, 159, 0.8),
-                    -5px 5px rgba(255, 0, 255, 0.8),
-                    5px -5px rgba(0, 255, 255, 0.8);
-                transform: translate(-2px, 0);
+            50% {
+                filter: brightness(1.2);
             }
         }
 
         .tagline {
             font-size: 32px;
-            color: #00ffff;
+            color: #ffffff;
             margin-bottom: 18px;
             font-weight: 600;
-            letter-spacing: 3px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.6), 0 0 10px rgba(0, 255, 255, 0.3);
+            letter-spacing: 1px;
         }
 
         .subtitle {
             font-size: 19px;
-            color: #ff00ff;
+            color: #999;
             margin-bottom: 60px;
             font-weight: 400;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .stats-box {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.4);
+            border-radius: 24px;
             padding: 50px 70px;
             margin-bottom: 45px;
             display: inline-block;
             box-shadow:
-                0 0 15px rgba(0, 255, 159, 0.3),
-                inset 0 0 15px rgba(0, 255, 159, 0.05);
+                0 0 40px rgba(255, 107, 53, 0.2),
+                0 0 80px rgba(255, 107, 53, 0.1),
+                inset 0 0 60px rgba(255, 107, 53, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.4s ease;
-            position: relative;
-        }
-
-        .stats-box::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #00ff9f, #00ffff, #ff00ff, #00ff9f);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .stats-box:hover::before {
-            opacity: 1;
-            animation: borderRotate 3s linear infinite;
-        }
-
-        @keyframes borderRotate {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-
-            100% {
-                filter: hue-rotate(360deg);
-            }
         }
 
         .stats-box:hover {
             transform: translateY(-5px);
             box-shadow:
-                0 0 25px rgba(0, 255, 159, 0.5),
-                inset 0 0 25px rgba(0, 255, 159, 0.1);
+                0 0 60px rgba(255, 107, 53, 0.3),
+                0 0 120px rgba(255, 107, 53, 0.15),
+                inset 0 0 80px rgba(255, 107, 53, 0.08);
         }
 
         .stats-grid {
@@ -431,31 +360,29 @@
         .stat-value {
             font-size: 64px;
             font-weight: 900;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
-            text-shadow:
-                0 0 5px rgba(0, 255, 159, 0.8),
-                0 0 10px rgba(0, 255, 159, 0.4);
+            text-shadow: 0 0 40px rgba(255, 107, 53, 0.5);
         }
 
         .stat-label {
             font-size: 14px;
-            color: #00ffff;
+            color: #aaa;
             margin-top: 14px;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-transform: uppercase;
             font-weight: 600;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .highlights {
             font-size: 19px;
-            color: #ff00ff;
+            color: #ff6b35;
             margin-bottom: 45px;
             font-style: italic;
             font-weight: 500;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.6), 0 0 10px rgba(255, 0, 255, 0.3);
         }
 
         .status {
@@ -469,10 +396,10 @@
         .status-dot {
             width: 14px;
             height: 14px;
-            background: #00ff9f;
+            background: #28a745;
             border-radius: 50%;
             animation: statusBlink 1.5s ease-in-out infinite;
-            box-shadow: 0 0 10px rgba(0, 255, 159, 0.8), 0 0 20px rgba(0, 255, 159, 0.4);
+            box-shadow: 0 0 20px #28a745;
         }
 
         @keyframes statusBlink {
@@ -480,118 +407,81 @@
             0%,
             100% {
                 opacity: 1;
-                box-shadow: 0 0 10px rgba(0, 255, 159, 0.8), 0 0 20px rgba(0, 255, 159, 0.4);
+                box-shadow: 0 0 20px #28a745;
                 transform: scale(1);
             }
 
             50% {
                 opacity: 0.6;
-                box-shadow: 0 0 15px rgba(0, 255, 159, 1), 0 0 30px rgba(0, 255, 159, 0.5);
-                transform: scale(1.2);
+                box-shadow: 0 0 30px #28a745;
+                transform: scale(1.1);
             }
         }
 
         .status-text {
             font-size: 13px;
-            color: #00ff9f;
+            color: #28a745;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .footer-text {
             font-size: 15px;
-            color: #00ffff;
+            color: #666;
             margin-top: 25px;
             font-weight: 400;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .slide-title {
             font-size: 56px;
             font-weight: 900;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 18px;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow:
-                0 0 5px rgba(0, 255, 159, 0.8),
-                0 0 10px rgba(0, 255, 159, 0.4),
-                2px 2px rgba(255, 0, 255, 0.5),
-                -2px -2px rgba(0, 255, 255, 0.5);
         }
 
         .slide-subtitle {
             font-size: 19px;
-            color: #ff00ff;
+            color: #ff8c5a;
             margin-bottom: 60px;
             opacity: 0.9;
             font-weight: 500;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .highlight-box {
-            background: rgba(0, 0, 0, 0.9);
-            border: 3px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 28px;
             padding: 70px 90px;
             margin-bottom: 50px;
             display: inline-block;
             backdrop-filter: blur(10px);
             box-shadow:
-                0 0 20px rgba(0, 255, 159, 0.4),
-                inset 0 0 20px rgba(0, 255, 159, 0.05);
+                0 0 50px rgba(255, 107, 53, 0.2),
+                0 0 100px rgba(255, 107, 53, 0.1);
             transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .highlight-box::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg,
-                    transparent,
-                    rgba(0, 255, 159, 0.05),
-                    transparent);
-            animation: shine 3s linear infinite;
-        }
-
-        @keyframes shine {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
         }
 
         .highlight-box:hover {
             transform: translateY(-8px);
             box-shadow:
-                0 0 30px rgba(0, 255, 159, 0.6),
-                inset 0 0 30px rgba(0, 255, 159, 0.1);
-            border-color: #ff00ff;
+                0 0 70px rgba(255, 107, 53, 0.3),
+                0 0 140px rgba(255, 107, 53, 0.15);
         }
 
         .highlight-number {
             font-size: 160px;
             font-weight: 900;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 50%, #ff6b35 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
-            text-shadow:
-                0 0 10px rgba(0, 255, 159, 0.8),
-                0 0 20px rgba(0, 255, 159, 0.4),
-                5px 5px rgba(255, 0, 255, 0.5),
-                -5px -5px rgba(0, 255, 255, 0.5);
             animation: numberPulse 2s ease-in-out infinite;
         }
 
@@ -610,20 +500,17 @@
         .highlight-title {
             font-size: 40px;
             font-weight: 800;
-            color: #00ffff;
+            color: #ffffff;
             margin-top: 25px;
-            letter-spacing: 5px;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.3);
+            letter-spacing: 3px;
         }
 
         .highlight-subtitle {
             font-size: 22px;
-            color: #ff00ff;
+            color: #ff8c5a;
             margin-top: 18px;
             opacity: 0.95;
             font-weight: 500;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .stats-row {
@@ -635,9 +522,9 @@
         }
 
         .stat-card {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
             padding: 40px 35px;
             text-align: center;
             width: 220px;
@@ -647,8 +534,8 @@
             justify-content: center;
             align-items: center;
             box-shadow:
-                0 0 10px rgba(0, 255, 159, 0.3),
-                inset 0 0 10px rgba(0, 255, 159, 0.03);
+                0 0 20px rgba(255, 107, 53, 0.1),
+                0 0 40px rgba(255, 107, 53, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -656,27 +543,27 @@
         .stat-card:hover {
             transform: translateY(-5px);
             box-shadow:
-                0 0 20px rgba(0, 255, 159, 0.5),
-                inset 0 0 20px rgba(0, 255, 159, 0.05);
-            border-color: #ff00ff;
+                0 0 35px rgba(255, 107, 53, 0.25),
+                0 0 70px rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.5);
         }
 
         .stat-card .value {
             font-size: 42px;
             font-weight: 800;
-            color: #00ff9f;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.7), 0 0 10px rgba(0, 255, 159, 0.3);
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .stat-card .label {
             font-size: 13px;
-            color: #00ffff;
+            color: #aaa;
             margin-top: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
         }
 
         .content-row {
@@ -698,32 +585,30 @@
         .screenshot img {
             width: 100%;
             height: auto;
-            border: 3px solid #00ff9f;
+            border-radius: 16px;
             box-shadow:
-                0 0 15px rgba(0, 255, 159, 0.4),
-                0 25px 80px rgba(0, 0, 0, 0.6);
+                0 25px 80px rgba(0, 0, 0, 0.6),
+                0 0 50px rgba(255, 107, 53, 0.2);
             transition: all 0.4s ease;
-            filter: brightness(1.1) contrast(1.2);
         }
 
         .screenshot img:hover {
             transform: translateY(-10px);
             box-shadow:
-                0 0 25px rgba(0, 255, 159, 0.6),
-                0 35px 100px rgba(0, 0, 0, 0.7);
-            border-color: #ff00ff;
+                0 35px 100px rgba(0, 0, 0, 0.7),
+                0 0 70px rgba(255, 107, 53, 0.3);
         }
 
         .info-panel {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 24px;
             padding: 45px 55px;
             min-width: 340px;
             max-width: 450px;
             box-shadow:
-                0 0 15px rgba(0, 255, 159, 0.3),
-                inset 0 0 15px rgba(0, 255, 159, 0.03);
+                0 0 30px rgba(255, 107, 53, 0.15),
+                0 0 60px rgba(255, 107, 53, 0.08);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -731,36 +616,34 @@
         .info-panel:hover {
             transform: translateY(-5px);
             box-shadow:
-                0 0 25px rgba(0, 255, 159, 0.5),
-                inset 0 0 25px rgba(0, 255, 159, 0.05);
+                0 0 45px rgba(255, 107, 53, 0.25),
+                0 0 90px rgba(255, 107, 53, 0.12);
         }
 
         .info-title {
             font-size: 13px;
-            color: #00ff9f;
+            color: #ff6b35;
             font-weight: 700;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             margin-bottom: 35px;
             text-transform: uppercase;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .info-row {
             display: flex;
             justify-content: space-between;
             padding: 16px 0;
-            border-bottom: 1px solid rgba(0, 255, 159, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.2s ease;
         }
 
         .info-row:hover {
-            background: rgba(0, 255, 159, 0.05);
+            background: rgba(255, 107, 53, 0.05);
             padding-left: 10px;
             padding-right: 10px;
             margin-left: -10px;
             margin-right: -10px;
-            border-bottom-color: rgba(0, 255, 159, 0.5);
+            border-radius: 8px;
         }
 
         .info-row:last-child {
@@ -768,11 +651,9 @@
         }
 
         .info-label {
-            color: #00ffff;
+            color: #999;
             font-size: 15px;
             font-weight: 500;
-            text-shadow: 0 0 3px rgba(0, 255, 255, 0.4);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .info-value {
@@ -781,30 +662,27 @@
         }
 
         .info-value.green {
-            color: #00ff9f;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
+            color: #28a745;
         }
 
         .info-value.white {
             color: #ffffff;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         .info-value.orange {
-            color: #ff00ff;
-            text-shadow: 0 0 5px rgba(255, 0, 255, 0.6);
+            color: #ff6b35;
         }
 
         .perf-panel {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 24px;
             padding: 55px;
             text-align: center;
             min-width: 320px;
             box-shadow:
-                0 0 15px rgba(0, 255, 159, 0.3),
-                inset 0 0 15px rgba(0, 255, 159, 0.03);
+                0 0 30px rgba(255, 107, 53, 0.15),
+                0 0 60px rgba(255, 107, 53, 0.08);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -812,36 +690,36 @@
         .perf-panel:hover {
             transform: translateY(-5px);
             box-shadow:
-                0 0 25px rgba(0, 255, 159, 0.5),
-                inset 0 0 25px rgba(0, 255, 159, 0.05);
+                0 0 45px rgba(255, 107, 53, 0.25),
+                0 0 90px rgba(255, 107, 53, 0.12);
         }
 
         .perf-big {
             font-size: 90px;
             font-weight: 900;
-            color: #00ff9f;
-            text-shadow:
-                0 0 10px rgba(0, 255, 159, 0.8),
-                0 0 20px rgba(0, 255, 159, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .perf-label {
             font-size: 15px;
-            color: #00ffff;
+            color: #aaa;
             margin-top: 14px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 1px;
         }
 
         .perf-stat {
             font-size: 36px;
             font-weight: 800;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-top: 25px;
-            text-shadow: 0 0 8px rgba(0, 255, 159, 0.7), 0 0 15px rgba(0, 255, 159, 0.3);
         }
 
         .assets-grid {
@@ -853,15 +731,15 @@
         }
 
         .asset-card {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 24px;
             padding: 40px 50px;
             text-align: center;
             min-width: 220px;
             box-shadow:
-                0 0 12px rgba(0, 255, 159, 0.25),
-                inset 0 0 12px rgba(0, 255, 159, 0.03);
+                0 0 25px rgba(255, 107, 53, 0.12),
+                0 0 50px rgba(255, 107, 53, 0.06);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -869,27 +747,25 @@
         .asset-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow:
-                0 0 20px rgba(0, 255, 159, 0.5),
-                inset 0 0 20px rgba(0, 255, 159, 0.05);
-            border-color: #ff00ff;
+                0 0 40px rgba(255, 107, 53, 0.3),
+                0 0 80px rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.5);
         }
 
         .asset-symbol {
             font-size: 42px;
             font-weight: 900;
-            color: #00ff9f;
-            text-shadow:
-                0 0 8px rgba(0, 255, 159, 0.8),
-                0 0 15px rgba(0, 255, 159, 0.4);
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .asset-name {
             font-size: 14px;
-            color: #00ffff;
+            color: #999;
             margin-top: 10px;
             font-weight: 500;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .asset-trades {
@@ -897,24 +773,23 @@
             color: #fff;
             margin-top: 20px;
             font-weight: 600;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         .asset-profit {
             font-size: 32px;
             font-weight: 800;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-top: 14px;
-            text-shadow: 0 0 8px rgba(0, 255, 159, 0.7), 0 0 15px rgba(0, 255, 159, 0.3);
         }
 
         .asset-losses {
             font-size: 14px;
-            color: #00ff9f;
+            color: #28a745;
             margin-top: 12px;
             font-weight: 600;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .features-grid {
@@ -925,59 +800,59 @@
         }
 
         .feature-card {
-            background: rgba(0, 0, 0, 0.9);
-            border: 2px solid #00ff9f;
-            border-radius: 0;
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(15, 15, 25, 0.95));
+            border: 1px solid rgba(255, 107, 53, 0.25);
+            border-radius: 20px;
             padding: 35px;
             text-align: left;
             width: 300px;
             box-shadow:
-                0 0 10px rgba(0, 255, 159, 0.25),
-                inset 0 0 10px rgba(0, 255, 159, 0.03);
+                0 0 20px rgba(255, 107, 53, 0.1),
+                0 0 40px rgba(255, 107, 53, 0.05);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
 
         .feature-card:hover {
             box-shadow:
-                0 0 20px rgba(0, 255, 159, 0.5),
-                inset 0 0 20px rgba(0, 255, 159, 0.05);
-            border-color: #ff00ff;
+                0 0 35px rgba(255, 107, 53, 0.25),
+                0 0 70px rgba(255, 107, 53, 0.12);
+            border-color: rgba(255, 107, 53, 0.4);
             transform: translateY(-5px);
         }
 
         .feature-title {
             font-size: 17px;
             font-weight: 800;
-            color: #00ff9f;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 14px;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
         }
 
         .feature-desc {
             font-size: 14px;
-            color: #00ffff;
+            color: #aaa;
             line-height: 1.7;
             font-weight: 400;
-            text-shadow: 0 0 3px rgba(0, 255, 255, 0.3);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .lb-row {
             display: flex;
             align-items: center;
             padding: 16px 0;
-            border-bottom: 1px solid rgba(0, 255, 159, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: all 0.2s ease;
         }
 
         .lb-row:hover {
-            background: rgba(0, 255, 159, 0.05);
+            background: rgba(255, 107, 53, 0.05);
             padding-left: 10px;
             padding-right: 10px;
             margin-left: -10px;
             margin-right: -10px;
-            border-bottom-color: rgba(0, 255, 159, 0.5);
+            border-radius: 8px;
         }
 
         .lb-row:last-child {
@@ -986,59 +861,51 @@
 
         .lb-rank {
             width: 45px;
-            color: #00ff9f;
+            color: #ff6b35;
             font-weight: 800;
             font-size: 15px;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
         }
 
         .lb-name {
             flex: 1;
             font-size: 16px;
             font-weight: 600;
-            color: #ffffff;
-            text-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
         }
 
         .lb-profit {
-            color: #00ff9f;
+            color: #ff6b35;
             font-weight: 700;
             font-size: 16px;
             width: 100px;
             text-align: right;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
         }
 
         .lb-winrate {
-            color: #00ff9f;
+            color: #28a745;
             font-size: 14px;
             width: 75px;
             text-align: right;
             font-weight: 600;
-            text-shadow: 0 0 5px rgba(0, 255, 159, 0.6);
-            font-family: 'Share Tech Mono', monospace;
         }
 
         .coming-soon-badge {
             display: inline-block;
-            background: rgba(0, 0, 0, 0.9);
-            border: 3px solid #ff00ff;
-            color: #ff00ff;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.4), rgba(255, 107, 53, 0.2));
+            border: 2px solid #ff6b35;
+            color: #ff6b35;
             padding: 24px 65px;
-            border-radius: 0;
+            border-radius: 60px;
             font-size: 28px;
             font-weight: 900;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             text-transform: uppercase;
             margin-top: 45px;
             animation: megaPulse 2s ease-in-out infinite;
             box-shadow:
-                0 0 20px rgba(255, 0, 255, 0.6),
-                0 0 40px rgba(255, 0, 255, 0.3),
-                inset 0 0 20px rgba(255, 0, 255, 0.1);
-            text-shadow:
-                0 0 5px rgba(255, 0, 255, 0.8),
-                0 0 10px rgba(255, 0, 255, 0.5);
+                0 0 40px rgba(255, 107, 53, 0.6),
+                0 0 80px rgba(255, 107, 53, 0.4),
+                0 0 120px rgba(255, 107, 53, 0.3),
+                inset 0 0 40px rgba(255, 107, 53, 0.2);
         }
 
         @keyframes megaPulse {
@@ -1046,37 +913,42 @@
             0%,
             100% {
                 box-shadow:
-                    0 0 20px rgba(255, 0, 255, 0.6),
-                    0 0 40px rgba(255, 0, 255, 0.3),
-                    inset 0 0 20px rgba(255, 0, 255, 0.1);
+                    0 0 40px rgba(255, 107, 53, 0.6),
+                    0 0 80px rgba(255, 107, 53, 0.4),
+                    0 0 120px rgba(255, 107, 53, 0.3),
+                    inset 0 0 40px rgba(255, 107, 53, 0.2);
                 transform: scale(1);
             }
 
             50% {
                 box-shadow:
-                    0 0 30px rgba(255, 0, 255, 0.8),
-                    0 0 60px rgba(255, 0, 255, 0.4),
-                    inset 0 0 25px rgba(255, 0, 255, 0.15);
+                    0 0 60px rgba(255, 107, 53, 0.8),
+                    0 0 120px rgba(255, 107, 53, 0.5),
+                    0 0 180px rgba(255, 107, 53, 0.4),
+                    inset 0 0 50px rgba(255, 107, 53, 0.3);
                 transform: scale(1.05);
             }
         }
 
         .note {
             font-size: 16px;
-            color: #00ffff;
+            color: #888;
             margin-top: 35px;
             font-weight: 400;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-            font-family: 'Share Tech Mono', monospace;
         }
 
-        /* RESPONSIVE */
+        /* TABLET RESPONSIVE */
         @media (max-width: 1024px) {
             .slide {
                 padding: 60px 30px;
             }
 
+            .content {
+                max-width: 100%;
+            }
+
             .content-row {
+                max-width: 100%;
                 gap: 40px;
             }
 
@@ -1111,8 +983,20 @@
                 width: 240px;
                 padding: 25px;
             }
+
+            .slide-nav {
+                right: 20px;
+            }
+
+            .autoplay-control {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
         }
 
+        /* MOBILE RESPONSIVE */
         @media (max-width: 768px) {
             html {
                 scroll-snap-type: y proximity;
@@ -1122,6 +1006,10 @@
                 padding: 40px 20px;
                 height: auto;
                 min-height: 100vh;
+            }
+
+            .content {
+                padding: 0 5px;
             }
 
             .slide-nav {
@@ -1139,12 +1027,13 @@
             .coming-soon-badge {
                 padding: 16px 35px;
                 font-size: 18px;
-                letter-spacing: 4px;
+                letter-spacing: 3px;
+                border-radius: 40px;
             }
 
             .logo {
                 font-size: 42px;
-                letter-spacing: 8px;
+                letter-spacing: 6px;
             }
 
             .tagline {
@@ -1157,9 +1046,23 @@
                 padding: 0 10px;
             }
 
+            .status {
+                margin-top: 25px !important;
+            }
+
+            .status-text {
+                font-size: 11px;
+                letter-spacing: 2px;
+            }
+
+            .footer-text {
+                font-size: 13px;
+                margin-top: 20px !important;
+            }
+
             .slide-title {
                 font-size: 28px;
-                letter-spacing: 4px;
+                letter-spacing: 3px;
                 margin-bottom: 15px;
             }
 
@@ -1194,6 +1097,15 @@
                 margin: 20px 0;
             }
 
+            .highlight-label {
+                font-size: 15px;
+            }
+
+            .note {
+                font-size: 12px;
+                margin-top: 15px;
+            }
+
             .content-row {
                 flex-direction: column;
                 gap: 20px;
@@ -1205,12 +1117,33 @@
                 order: 1;
             }
 
+            .screenshot img {
+                border-radius: 10px;
+            }
+
             .info-panel {
                 max-width: 100%;
                 min-width: auto;
                 width: 100%;
                 padding: 25px 20px;
                 order: 2;
+            }
+
+            .info-title {
+                font-size: 12px;
+                margin-bottom: 20px;
+            }
+
+            .info-row {
+                padding: 10px 0;
+            }
+
+            .info-label {
+                font-size: 13px;
+            }
+
+            .info-value {
+                font-size: 14px;
             }
 
             .perf-panel {
@@ -1224,8 +1157,17 @@
                 font-size: 56px;
             }
 
+            .perf-label {
+                font-size: 13px;
+            }
+
+            .perf-stat {
+                font-size: 24px;
+            }
+
             .assets-grid {
                 gap: 15px;
+                justify-content: center;
             }
 
             .asset-card {
@@ -1235,6 +1177,10 @@
 
             .asset-symbol {
                 font-size: 28px;
+            }
+
+            .asset-name {
+                font-size: 12px;
             }
 
             .stats-row {
@@ -1257,6 +1203,7 @@
 
             .features-grid {
                 gap: 15px;
+                justify-content: center;
             }
 
             .feature-card {
@@ -1264,8 +1211,40 @@
                 max-width: 300px;
                 padding: 20px;
             }
+
+            .feature-title {
+                font-size: 15px;
+            }
+
+            .feature-desc {
+                font-size: 13px;
+            }
+
+            .lb-row {
+                padding: 10px 0;
+            }
+
+            .lb-rank {
+                font-size: 12px;
+                width: 30px;
+            }
+
+            .lb-name {
+                font-size: 13px;
+            }
+
+            .lb-profit {
+                font-size: 13px;
+                width: 70px;
+            }
+
+            .lb-winrate {
+                font-size: 11px;
+                width: 55px;
+            }
         }
 
+        /* SMALL MOBILE */
         @media (max-width: 480px) {
             .slide {
                 padding: 30px 15px;
@@ -1274,12 +1253,12 @@
             .coming-soon-badge {
                 padding: 12px 22px;
                 font-size: 13px;
-                letter-spacing: 3px;
+                letter-spacing: 2px;
             }
 
             .logo {
                 font-size: 32px;
-                letter-spacing: 6px;
+                letter-spacing: 4px;
             }
 
             .tagline {
@@ -1292,7 +1271,7 @@
 
             .slide-title {
                 font-size: 22px;
-                letter-spacing: 3px;
+                letter-spacing: 2px;
             }
 
             .slide-subtitle {
@@ -1312,6 +1291,10 @@
                 font-size: 48px;
             }
 
+            .highlight-label {
+                font-size: 14px;
+            }
+
             .info-panel {
                 padding: 20px 15px;
             }
@@ -1322,6 +1305,10 @@
 
             .perf-big {
                 font-size: 44px;
+            }
+
+            .perf-stat {
+                font-size: 20px;
             }
 
             .asset-card {
@@ -1341,6 +1328,10 @@
 
             .stat-card .value {
                 font-size: 22px;
+            }
+
+            .stat-card .label {
+                font-size: 10px;
             }
 
             .feature-card {
@@ -1475,7 +1466,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/Portfolio.jpg" alt="Dashboard">
+                    <img src="/images/photo1768583813.jpg" alt="Dashboard">
                 </div>
                 <div class="info-panel">
                     <div class="info-title">KEY METRICS</div>
@@ -1522,7 +1513,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/Portfolio.jpg" alt="Trade History">
+                    <img src="/images/photo1768583813.jpg" alt="Trade History">
                 </div>
                 <div class="perf-panel">
                     <div class="info-title">PERFORMANCE</div>
@@ -1602,7 +1593,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/Portfolio.jpg" alt="Leaderboard">
+                    <img src="/images/photo1768583813.jpg" alt="Leaderboard">
                 </div>
                 <div class="info-panel">
                     <div class="info-title">TOP PERFORMERS</div>
@@ -1903,8 +1894,14 @@
         updateNavigation();
         updateProgressBar();
         if (!('ontouchstart' in window)) {
-    startAutoplay();
-}
+            startAutoplay();
+        } else {
+            // На мобильных устанавливаем правильную иконку
+            isAutoPlaying = false;
+            autoplayBtn.classList.remove('playing');
+            playIcon.textContent = '▶';
+            autoplayBtn.title = 'Play';
+        }
     </script>
 
 </body>
