@@ -32,6 +32,24 @@
             overflow-x: hidden;
         }
 
+        .slide-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(232, 90, 25, 0.3) 20%, rgba(232, 90, 25, 0.6) 50%, rgba(232, 90, 25, 0.3) 80%, transparent 100%);
+            position: relative;
+        }
+
+        .slide-divider::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 20px;
+            background: linear-gradient(90deg, transparent 0%, rgba(232, 90, 25, 0.1) 20%, rgba(232, 90, 25, 0.2) 50%, rgba(232, 90, 25, 0.1) 80%, transparent 100%);
+            filter: blur(8px);
+        }
+
         /* Progress Bar */
         .progress-bar {
             position: fixed;
@@ -1387,6 +1405,7 @@
             <div class="footer-text" style="margin-top: 40px;">The future of algorithmic trading is almost here</div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 2: OVERVIEW -->
     <div class="slide" data-slide="2">
@@ -1424,6 +1443,7 @@
             </div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 3: 100% WIN RATE -->
     <div class="slide" data-slide="3">
@@ -1457,6 +1477,7 @@
             </div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 4: DASHBOARD -->
     <div class="slide" data-slide="4">
@@ -1466,7 +1487,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/photo1768583813.jpg" alt="Dashboard">
+                    <img src="/images/Dashboard.png" alt="Dashboard">
                 </div>
                 <div class="info-panel">
                     <div class="info-title">KEY METRICS</div>
@@ -1504,6 +1525,7 @@
             <div class="note">Track positions • Monitor P&L • Full transparency</div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 5: TRADE HISTORY -->
     <div class="slide" data-slide="5">
@@ -1513,7 +1535,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/photo1768583813.jpg" alt="Trade History">
+                    <img src="/images/History.png" alt="Trade History">
                 </div>
                 <div class="perf-panel">
                     <div class="info-title">PERFORMANCE</div>
@@ -1531,6 +1553,7 @@
             <div class="note">Every trade is profitable • Auditable records</div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 6: MULTI-ASSET -->
     <div class="slide" data-slide="6">
@@ -1584,6 +1607,7 @@
             </div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 7: LEADERBOARD -->
     <div class="slide" data-slide="7">
@@ -1593,7 +1617,7 @@
 
             <div class="content-row">
                 <div class="screenshot">
-                    <img src="/images/photo1768583813.jpg" alt="Leaderboard">
+                    <img src="/images/Leaderboard.png" alt="Leaderboard">
                 </div>
                 <div class="info-panel">
                     <div class="info-title">TOP PERFORMERS</div>
@@ -1633,6 +1657,7 @@
             <div class="note">Compete globally • Track your ranking</div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 8: WHY PROFITLAND -->
     <div class="slide" data-slide="8">
@@ -1674,6 +1699,7 @@
             </div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <!-- SLIDE 9: FINAL -->
     <div class="slide" data-slide="9">
@@ -1711,6 +1737,7 @@
             <div class="footer-text">The future of algorithmic trading is almost here</div>
         </div>
     </div>
+    <div class="slide-divider"></div>
 
     <script>
         // Initialize slide navigation
@@ -1896,7 +1923,6 @@
         if (!('ontouchstart' in window)) {
             startAutoplay();
         } else {
-            // На мобильных устанавливаем правильную иконку
             isAutoPlaying = false;
             autoplayBtn.classList.remove('playing');
             playIcon.textContent = '▶';
